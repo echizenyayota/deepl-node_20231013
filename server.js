@@ -15,7 +15,7 @@ app.use(cors());
 
 app.listen(PORT, () => console.log("Server running on PORT" + PORT));
 
-const authKey = ""; // Replace with your key
+const authKey = process.env.deepl_api_key; // Replace with your key
 const translator = new deepl.Translator(authKey);
 
 try {
