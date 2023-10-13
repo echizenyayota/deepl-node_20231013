@@ -1,3 +1,8 @@
+import { createRequire } from 'module';
+const require = createRequire(import.meta.url);
+
+import * as deepl from 'deepl-node';
+
 const PORT = 8000;
 const axios = require("axios").default;
 const express = require("express");
@@ -9,3 +14,18 @@ const app = express();
 app.use(cors());
 
 app.listen(PORT, () => console.log("Server running on PORT" + PORT));
+
+const authKey = ""; // Replace with your key
+const translator = new deepl.Translator(authKey);
+
+try {
+  (async () => {
+    const result = await translator.translateText('good evening', null, 'ja');
+    console.log(result.text); // こんにちは
+  })(); 
+} catch(err) {
+  console.log(err);
+  res.status(500).json({message: err});
+}
+
+
